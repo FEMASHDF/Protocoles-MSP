@@ -90,7 +90,8 @@
       const response = await fetch(CONFIG.endpoint,{method:'POST',headers:{'Authorization':`Bearer ${token.accessToken}`,'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(90000)});
       if (!response.ok) {
         let detail; try { detail = await response.json(); } catch {}
-        const reason = typeof detail?.error?.code === 'string' ? detail.error.code.replace(/[^a-zA-Z0-9_-]/g,'').slice(0,100) : '';
+        const code = detail?.error?.code || detail?.code;
+        const reason = typeof code === 'string' ? code.replace(/[^a-zA-Z0-9_-]/g,'').slice(0,100) : '';
         if ([401,403].includes(response.status)) remember({id,draftJson,pending:false});
         throw new Error(`Le service FEMAS a répondu avec une erreur (${response.status}${reason ? ' · '+reason : ''}).`);
       }
