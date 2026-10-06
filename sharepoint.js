@@ -5,7 +5,7 @@
     tenant: '2fd5f607-3a7c-4f83-bcf4-f93150a483d3',
     redirectUri: 'https://femashdf.github.io/Protocoles-MSP/',
     endpoint: 'https://default2fd5f6073a7c4f83bcf4f93150a483.d3.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/12/workflows/55be9bd4bfba42cc90107fe18bada306/triggers/manual/paths/invoke?api-version=1',
-    scopes: ['https://service.flow.microsoft.com/Flows.Install']
+    scopes: ['https://service.flow.microsoft.com//Flows.Install']
   };
   const connect = document.getElementById('microsoftConnect');
   const send = document.getElementById('sharepointSend');
