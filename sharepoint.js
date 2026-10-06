@@ -88,7 +88,12 @@
       remember({id,draftJson,pending:true});
       notice('Envoi en cours : dépôt du document et ajout au suivi FEMAS…');
       const response = await fetch(CONFIG.endpoint,{method:'POST',headers:{'Authorization':`Bearer ${token.accessToken}`,'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(90000)});
-      if (!response.ok) throw new Error(`Le service FEMAS a répondu avec une erreur (${response.status}).`);
+      if (!response.ok) {
+        let detail; try { detail = await response.json(); } catch {}
+        const reason = typeof detail?.error?.code === 'string' ? detail.error.code.replace(/[^a-zA-Z0-9_-]/g,'').slice(0,100) : '';
+        if ([401,403].includes(response.status)) remember({id,draftJson,pending:false});
+        throw new Error(`Le service FEMAS a répondu avec une erreur (${response.status}${reason ? ' · '+reason : ''}).`);
+      }
       const value = await response.json();
       const expected = `https://femashdf.sharepoint.com/sites/CPOMOS/Documents%20partages/Protocoles%20pluripro/Protocole-${id}.doc`;
       if (value.ok !== true || value.id !== id || !value.itemId || value.documentUrl !== expected) throw new Error('Le service n’a pas confirmé le dépôt complet.');
