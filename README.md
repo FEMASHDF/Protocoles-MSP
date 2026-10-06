@@ -4,7 +4,7 @@ Formulaire statique en français pour préparer une fiche d’identité et un pr
 
 ## Utilisation
 
-Ouvrir `index.html` ou publier les trois fichiers `index.html`, `style.css` et `app.js` avec GitHub Pages. Aucun service externe ni clé d’accès nécessaire.
+Publier l’ensemble des fichiers avec GitHub Pages. La rédaction et les exports fonctionnent localement. L’envoi FEMAS utilise la connexion Microsoft et le flux Power Automate de CPOM OS ; aucun secret n’est placé dans le site.
 
 Le parcours comporte une fiche d’identité enrichie (besoin, objectifs, population, équipe, références), les étapes de soins et un document automatiquement composé. Les lieux et objectifs généraux alimentent les cellules Où / Pourquoi lorsque l’étape ne les précise pas. Les autres informations manquantes apparaissent « À compléter » : aucune décision clinique n’est inventée.
 
@@ -12,7 +12,7 @@ Sauvegarde automatique dans le navigateur ; export/import JSON pour reprise ; im
 
 ## Confidentialité
 
-Aucune réponse n’est envoyée à GitHub, à FEMAS ou à un serveur. Les réponses sont conservées dans le stockage local du navigateur et dans les fichiers exportés. Ne pas saisir de données de patients. Sur un ordinateur partagé, exporter puis effacer le brouillon.
+Les réponses restent dans le stockage local du navigateur jusqu’à un envoi volontaire à la FEMAS, après connexion Microsoft et confirmation du professionnel. Le flux dépose le document dans le dossier SharePoint « Protocoles pluripro » et crée une ligne dans « Suivi des protocoles pluripro ». Le statut « Reçu » confirme la réception, sans validation clinique. Ne pas saisir de données de patients. Sur un ordinateur partagé, exporter puis effacer le brouillon.
 
 ## Cadre et limites
 
@@ -24,4 +24,4 @@ Sources consultées le 6 octobre 2026 :
 
 ## Publication GitHub Pages
 
-Dans les paramètres du dépôt : Pages → Deploy from a branch → main → / (root) → Save. Le formulaire ne collecte aucune réponse centralisée. Pour une future sauvegarde d’équipe à distance, concevoir séparément le stockage et les droits d’accès.
+Dans les paramètres du dépôt : Pages → Deploy from a branch → main → / (root) → Save. Le retour de connexion Microsoft doit correspondre exactement à https://femashdf.github.io/Protocoles-MSP/. Bibliothèque Microsoft officielle MSAL Browser 5.24.0, licence fournie dans MSAL-LICENSE.txt. Le flux exige un compte du tenant FEMAS HDF. En cas de réception non confirmée, vérifier la liste SharePoint avant un nouvel envoi.
