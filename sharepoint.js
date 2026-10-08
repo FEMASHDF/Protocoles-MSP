@@ -41,7 +41,7 @@
     const result = await auth.handleRedirectPromise({navigateToLoginRequestUrl: false});
     account = result?.account || auth.getActiveAccount() || auth.getAllAccounts()[0];
     if (account) auth.setActiveAccount(account);
-    if (result) { go(2); notice('Connexion Microsoft réussie. Relisez le protocole puis confirmez son envoi.'); }
+    if (result) { go(DOC_STEP); notice('Connexion Microsoft réussie. Relisez le protocole puis confirmez son envoi.'); }
     update();
   }
   const ready = initialize().catch(error => { notice(error.message || 'Connexion Microsoft indisponible.'); update(); });
@@ -64,7 +64,7 @@
     for (const name of ['title','msp','owner','theme','version']) {
       if ((fields[name] || '').length > 255) { notice('Le titre, la MSP, le référent, la thématique et la version doivent comporter au maximum 255 caractères chacun.'); return; }
     }
-    const draftJson = JSON.stringify({schema:1,...state});
+    const draftJson = JSON.stringify(draftData());
     const documentHtml = protocolWordHtml();
     if (draftJson.length > 1500000 || documentHtml.length > 1500000) { notice('Ce protocole dépasse la taille autorisée. Réduisez son contenu avant de l’envoyer.'); return; }
     const previous = safeRead();
